@@ -1,0 +1,24 @@
+def findsecondmaxmin(list):
+    if len(list)<2:
+        return None,None
+
+    def helper(list,min1,min2,max1,max2,index):
+        if index ==len(list):
+            return min2,max2
+        if list[index]<min1:
+            min2=min1
+            min1=list[index]
+        elif list[index] < min2 and list[index] != min1:
+            min2 =list[index]
+        if list[index] > max1:
+            max2=max1
+            max1=list[index]
+        elif list[index] > max2 and list[index] !=max1:
+            max2 = list[index]
+        return helper(list,min1,min2,max1,max2,index+1)
+    return helper(list,float('inf'),float('inf'),float('-inf'),float('-inf'),0)
+
+sequence = list(map(int, input("Enter numbers separated by spaces: ").split()))
+secondmin, secondmax= findsecondmaxmin(sequence)
+print("Second Minimum: ", secondmin)
+print("Second Maximum: ", secondmax)
